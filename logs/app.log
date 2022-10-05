@@ -1,0 +1,136 @@
+2022/10/04 10:56:03 ---------------Start logging---------------
+2022/10/04 10:57:19 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 10:59:40 ---------------Start logging---------------
+2022/10/04 11:01:08 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:02:04 ---------------Start logging---------------
+2022/10/04 11:02:22 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:12:49 ---------------Start logging---------------
+2022/10/04 11:12:57 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:14:01 ---------------Start logging---------------
+2022/10/04 11:14:24 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:19:04 ---------------Start logging---------------
+2022/10/04 11:19:24 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:20:05 ---------------Start logging---------------
+2022/10/04 11:27:02 ---------------Start logging---------------
+2022/10/04 11:27:44 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:29:12 ---------------Start logging---------------
+2022/10/04 11:29:20 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:31:35 ---------------Start logging---------------
+2022/10/04 11:31:43 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:34:19 ---------------Start logging---------------
+2022/10/04 11:35:26 ---------------Start logging---------------
+2022/10/04 11:35:50 ---------------Start logging---------------
+2022/10/04 11:36:02 ---------------Start logging---------------
+2022/10/04 11:36:31 ---------------Start logging---------------
+2022/10/04 11:37:10 ---------------Start logging---------------
+2022/10/04 11:37:38 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:38:25 ---------------Start logging---------------
+2022/10/04 11:38:29 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:39:28 ---------------Start logging---------------
+2022/10/04 11:39:33 parsing time "\"\"" as "\"2006-01-02T15:04:05Z07:00\"": cannot parse "\"" as "2006"
+2022/10/04 11:40:12 &{ID: CompanyName:Test1 FullName:Tamanno Phone:888812507 Location:Душанбе Created:2022-10-04 11:40:12.2318245 +0500 +05 m=+43.353104901}
+2022/10/04 11:42:10 ---------------Start logging---------------
+2022/10/04 11:42:17 &{ID: CompanyName:Test1 FullName:Tamanno Phone:888812507 Location:Душанбе Created:0001-01-01 00:00:00 +0000 UTC}
+2022/10/04 11:53:19 ---------------Start logging---------------
+2022/10/04 11:53:33 ---------------Start logging---------------
+2022/10/04 11:54:02 &{ID: CompanyName:Test1 FullName:Tamanno Phone:888812507 Location:Душанбе Created:0001-01-01 00:00:00 +0000 UTC}
+2022/10/04 11:56:44 ---------------Start logging---------------
+2022/10/04 11:56:51 &{ID: CompanyName:Test1 FullName:Tamanno Phone:888812507 Location:Душанбе Created:<nil>}
+2022/10/04 11:57:47 ---------------Start logging---------------
+2022/10/04 11:57:55 &{ID: CompanyName:Test1 FullName:Tamanno Phone:888812507 Location:Душанбе Created:<nil>}
+2022/10/04 11:58:18 &{ID: CompanyName:Test1 FullName:Tamanno Phone:888812507 Location:Душанбе Created:<nil>}
+2022/10/04 11:58:18 db,CreateCards err pq: relation "cards" does not exist
+2022/10/04 11:59:52 ---------------Start logging---------------
+2022/10/04 12:00:06 &{ID: CompanyName:Test1 FullName:Tamanno Phone:888812507 Location:Душанбе Created:<nil>}
+2022/10/04 12:01:26 ---------------Start logging---------------
+2022/10/04 12:01:36 &{ID: CompanyName:Test1 FullName:Tamanno Phone:888812507 Location:Душанбе CreatedAt:0001-01-01 00:00:00 +0000 UTC}
+2022/10/04 14:46:08 ---------------Start logging---------------
+2022/10/04 14:46:29 http: panic serving [::1]:56501: reflect: reflect.Value.Set using unaddressable value
+goroutine 23 [running]:
+net/http.(*conn).serve.func1()
+	C:/Program Files/Go/src/net/http/server.go:1825 +0xbf
+panic({0x6e5200, 0xc0001f71d0})
+	C:/Program Files/Go/src/runtime/panic.go:844 +0x258
+github.com/jinzhu/gorm.(*Scope).callCallbacks.func1()
+	C:/Users/user/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/scope.go:865 +0x74
+panic({0x6e5200, 0xc0001f71d0})
+	C:/Program Files/Go/src/runtime/panic.go:838 +0x207
+reflect.flag.mustBeAssignableSlow(0x0?)
+	C:/Program Files/Go/src/reflect/value.go:262 +0x85
+reflect.flag.mustBeAssignable(...)
+	C:/Program Files/Go/src/reflect/value.go:249
+reflect.Value.Set({0x6de160?, 0xa641e0?, 0x0?}, {0x6de160?, 0xc0000050b0?, 0x0?})
+	C:/Program Files/Go/src/reflect/value.go:2082 +0x6a
+github.com/jinzhu/gorm.queryCallback(0xc0001fc600)
+	C:/Users/user/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/callback_query.go:48 +0x528
+github.com/jinzhu/gorm.(*Scope).callCallbacks(0xc0001fc600, {0xc0001f1c80, 0x3, 0x110?})
+	C:/Users/user/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/scope.go:869 +0x99
+github.com/jinzhu/gorm.(*DB).Find(0xc00024c410, {0x6de160?, 0xa641e0?}, {0x0, 0x0, 0x0})
+	C:/Users/user/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:354 +0x205
+awesomeProject2/internal/cards.(*Cards).GetCards(0xc0001d2f00?)
+	C:/Users/user/GolandProjects/OrderTheCards/internal/cards/cards.go:22 +0x165
+awesomeProject2/handlers.GetCards({0x7f25b8, 0xc00022e1c0}, 0xc0001f8d00)
+	C:/Users/user/GolandProjects/OrderTheCards/handlers/cards.go:41 +0x105
+net/http.HandlerFunc.ServeHTTP(0xc0001f8c00?, {0x7f25b8?, 0xc00022e1c0?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2084 +0x2f
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0001483c0, {0x7f25b8, 0xc00022e1c0}, 0xc0001f8b00)
+	C:/Users/user/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1cf
+net/http.serverHandler.ServeHTTP({0xc0001d2d80?}, {0x7f25b8, 0xc00022e1c0}, 0xc0001f8b00)
+	C:/Program Files/Go/src/net/http/server.go:2916 +0x43b
+net/http.(*conn).serve(0xc0000e8000, {0x7f2878, 0xc0001d2c90})
+	C:/Program Files/Go/src/net/http/server.go:1966 +0x5d7
+created by net/http.(*Server).Serve
+	C:/Program Files/Go/src/net/http/server.go:3071 +0x4db
+2022/10/04 14:48:12 http: panic serving [::1]:63667: reflect: reflect.Value.Set using unaddressable value
+goroutine 10 [running]:
+net/http.(*conn).serve.func1()
+	C:/Program Files/Go/src/net/http/server.go:1825 +0xbf
+panic({0x6e5200, 0xc000098100})
+	C:/Program Files/Go/src/runtime/panic.go:844 +0x258
+github.com/jinzhu/gorm.(*Scope).callCallbacks.func1()
+	C:/Users/user/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/scope.go:865 +0x74
+panic({0x6e5200, 0xc000098100})
+	C:/Program Files/Go/src/runtime/panic.go:838 +0x207
+reflect.flag.mustBeAssignableSlow(0x0?)
+	C:/Program Files/Go/src/reflect/value.go:262 +0x85
+reflect.flag.mustBeAssignable(...)
+	C:/Program Files/Go/src/reflect/value.go:249
+reflect.Value.Set({0x6de160?, 0xa641e0?, 0x0?}, {0x6de160?, 0xc0000ac0c0?, 0x0?})
+	C:/Program Files/Go/src/reflect/value.go:2082 +0x6a
+github.com/jinzhu/gorm.queryCallback(0xc0000dc180)
+	C:/Users/user/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/callback_query.go:48 +0x528
+github.com/jinzhu/gorm.(*Scope).callCallbacks(0xc0000dc180, {0xc0001f1c80, 0x3, 0x110?})
+	C:/Users/user/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/scope.go:869 +0x99
+github.com/jinzhu/gorm.(*DB).Find(0xc0000aa410, {0x6de160?, 0xa641e0?}, {0x0, 0x0, 0x0})
+	C:/Users/user/go/pkg/mod/github.com/jinzhu/gorm@v1.9.16/main.go:354 +0x205
+awesomeProject2/internal/cards.(*Cards).GetCards(0xc0000a8570?)
+	C:/Users/user/GolandProjects/OrderTheCards/internal/cards/cards.go:22 +0x165
+awesomeProject2/handlers.GetCards({0x7f25b8, 0xc0000f0000}, 0xc0000e6400)
+	C:/Users/user/GolandProjects/OrderTheCards/handlers/cards.go:41 +0x105
+net/http.HandlerFunc.ServeHTTP(0xc0000e6300?, {0x7f25b8?, 0xc0000f0000?}, 0x0?)
+	C:/Program Files/Go/src/net/http/server.go:2084 +0x2f
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0001483c0, {0x7f25b8, 0xc0000f0000}, 0xc0000e6200)
+	C:/Users/user/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0x1cf
+net/http.serverHandler.ServeHTTP({0xc0000a83f0?}, {0x7f25b8, 0xc0000f0000}, 0xc0000e6200)
+	C:/Program Files/Go/src/net/http/server.go:2916 +0x43b
+net/http.(*conn).serve(0xc0001d5b80, {0x7f2878, 0xc0001d2c90})
+	C:/Program Files/Go/src/net/http/server.go:1966 +0x5d7
+created by net/http.(*Server).Serve
+	C:/Program Files/Go/src/net/http/server.go:3071 +0x4db
+2022/10/04 14:50:16 ---------------Start logging---------------
+2022/10/04 15:11:21 ---------------Start logging---------------
+2022/10/04 15:11:35 db,GetCards err pq: invalid input syntax for type uuid: "1"
+2022/10/04 16:19:07 ---------------Start logging---------------
+2022/10/04 17:11:28 ---------------Start logging---------------
+2022/10/04 17:13:47 EOF
+2022/10/04 17:14:39 ---------------Start logging---------------
+2022/10/04 17:17:17 ---------------Start logging---------------
+2022/10/04 17:30:00 ---------------Start logging---------------
+2022/10/04 17:31:25 ---------------Start logging---------------
+2022/10/04 17:32:47 ---------------Start logging---------------
+2022/10/04 17:45:35 ---------------Start logging---------------
+2022/10/04 17:48:13 ---------------Start logging---------------
+2022/10/04 17:48:26 {ID:52231c6b-df04-4b12-a50b-b91b32934c73 CompanyName: FullName: Phone:888812507 Location:Dushanbe CreatedAt:0001-01-01 00:00:00 +0000 UTC}
+2022/10/04 17:49:13 ---------------Start logging---------------
+2022/10/04 17:49:18 {ID:52231c6b-df04-4b12-a50b-b91b32934c73 CompanyName:test test FullName:test test Phone:888812507 Location:Dushanbe CreatedAt:0001-01-01 00:00:00 +0000 UTC}
+2022/10/04 17:49:47 db,GetCards err record not found

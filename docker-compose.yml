@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  visa_application_db:
+    image: postgres:latest
+    ports:
+      - 5467:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=visa_application
