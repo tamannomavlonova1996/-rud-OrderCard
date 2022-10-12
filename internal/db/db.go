@@ -18,7 +18,7 @@ func InitDB() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	DB.AutoMigrate(&models.Cards{})
+	DB.AutoMigrate(&models.OrderCard{}, &models.Card{}, &models.User{}, &models.Account{}, &models.Operation{})
 
 	return DB, nil
 }

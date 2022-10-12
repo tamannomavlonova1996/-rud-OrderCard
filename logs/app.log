@@ -134,3 +134,11 @@ created by net/http.(*Server).Serve
 2022/10/04 17:49:13 ---------------Start logging---------------
 2022/10/04 17:49:18 {ID:52231c6b-df04-4b12-a50b-b91b32934c73 CompanyName:test test FullName:test test Phone:888812507 Location:Dushanbe CreatedAt:0001-01-01 00:00:00 +0000 UTC}
 2022/10/04 17:49:47 db,GetCards err record not found
+2022/10/07 11:11:10 ---------------Start logging---------------
+2022/10/07 11:11:12 dial tcp [::1]:5467: connectex: No connection could be made because the target machine actively refused it.
+2022/10/07 11:11:12 Connection err dial tcp [::1]:5467: connectex: No connection could be made because the target machine actively refused it.
+2022/10/07 11:11:33 ---------------Start logging---------------
+2022/10/07 11:11:35 dial tcp [::1]:5467: connectex: No connection could be made because the target machine actively refused it.
+2022/10/07 11:11:35 Connection err dial tcp [::1]:5467: connectex: No connection could be made because the target machine actively refused it.
+2022/10/07 11:13:08 ---------------Start logging---------------
+2022/10/07 15:06:03 ---------------Start logging---------------

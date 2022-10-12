@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"awesomeProject2/internal/cards"
+	"awesomeProject2/internal/orderCard"
 	"awesomeProject2/models"
 	"encoding/json"
 	"github.com/gorilla/mux"
@@ -9,9 +9,9 @@ import (
 	"net/http"
 )
 
-func CreateCards(w http.ResponseWriter, r *http.Request) {
+func CreateOrderCard(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     cards.Cards
+		card     orderCard.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -25,7 +25,7 @@ func CreateCards(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	err = card.CreateCards()
+	err = card.CreateOrderCards()
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
@@ -36,16 +36,16 @@ func CreateCards(w http.ResponseWriter, r *http.Request) {
 	response.Message = "Данные добавились успешно!"
 }
 
-func GetCards(w http.ResponseWriter, r *http.Request) {
+func GetOrderCards(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     cards.Cards
+		card     orderCard.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	result, err := card.GetCards()
+	result, err := card.GetOrderCards()
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
@@ -58,9 +58,9 @@ func GetCards(w http.ResponseWriter, r *http.Request) {
 	response.Payload = result
 }
 
-func GetCardById(w http.ResponseWriter, r *http.Request) {
+func GetOrderCardByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     cards.Cards
+		card     orderCard.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -70,7 +70,7 @@ func GetCardById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	result, err := card.GetCardByID(id)
+	result, err := card.GetOrderCardByID(id)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
@@ -80,9 +80,9 @@ func GetCardById(w http.ResponseWriter, r *http.Request) {
 	response.Payload = result
 }
 
-func UpdateCardById(w http.ResponseWriter, r *http.Request) {
+func UpdateOrderCardByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     cards.Cards
+		card     orderCard.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -96,14 +96,14 @@ func UpdateCardById(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	err = card.UpdateCardByID()
+	err = card.UpdateOrderCardByID()
 
 	response.Message = "Данные обновлены успешно!"
 }
 
-func DeleteCardById(w http.ResponseWriter, r *http.Request) {
+func DeleteOrderCardByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     cards.Cards
+		card     orderCard.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -113,7 +113,7 @@ func DeleteCardById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	err := card.DeleteCardByID(id)
+	err := card.DeleteOrderCardByID(id)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
