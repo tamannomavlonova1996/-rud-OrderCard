@@ -12,6 +12,7 @@ import (
 
 func main() {
 	// app logging to file
+	//log.Logger{}
 	log.SetOutput(&lumberjack.Logger{
 		Filename:   "logs/app.log",
 		MaxSize:    2, // megabytes
@@ -30,5 +31,4 @@ func main() {
 
 	fmt.Println("Server listening")
 	http.ListenAndServe(":8080", routes.Routers())
-
 }

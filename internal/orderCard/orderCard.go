@@ -9,7 +9,7 @@ import (
 type OrderCard models.OrderCard
 
 func (c *OrderCard) CreateOrderCards() error {
-	err := db.DB.Table("orderCard").Create(&c).Error
+	err := db.DB.Table("order_cards").Create(&c).Error
 	if err != nil {
 		log.Println("db,CreateCards err", err)
 		return err
@@ -18,7 +18,7 @@ func (c *OrderCard) CreateOrderCards() error {
 }
 
 func (c *OrderCard) GetOrderCards() (cards []*OrderCard, err error) {
-	err = db.DB.Table("orderCard").Select("*").Find(&cards).Error
+	err = db.DB.Table("order_cards").Select("*").Preload("User").Find(&cards).Error
 	if err != nil {
 		log.Println("db,GetCards err", err)
 		return nil, err
@@ -27,7 +27,7 @@ func (c *OrderCard) GetOrderCards() (cards []*OrderCard, err error) {
 }
 
 func (c *OrderCard) GetOrderCardByID(id string) (*OrderCard, error) {
-	err := db.DB.Table("orderCard").Where("id=?", id).First(&c).Error
+	err := db.DB.Table("order_cards").Where("id=?", id).Preload("User").First(&c).Error
 	if err != nil {
 		log.Println("db,GetCardByID err", err)
 		return nil, err
@@ -36,7 +36,7 @@ func (c *OrderCard) GetOrderCardByID(id string) (*OrderCard, error) {
 }
 
 func (c *OrderCard) UpdateOrderCardByID() error {
-	err := db.DB.Table("orderCard").Where("id=?", c.ID).Update(c).Error
+	err := db.DB.Table("order_cards").Where("id=?", c.ID).Update(c).Error
 	if err != nil {
 		log.Println("db,UpdateCardByID err", err)
 		return err
@@ -45,7 +45,7 @@ func (c *OrderCard) UpdateOrderCardByID() error {
 }
 
 func (c *OrderCard) DeleteOrderCardByID(id string) error {
-	err := db.DB.Table("orderCard").Delete(&c, "id=?", id).Error
+	err := db.DB.Table("order_cards").Delete(&c, "id=?", id).Error
 	if err != nil {
 		log.Println("db,DeleteCardByID err", err)
 		return err

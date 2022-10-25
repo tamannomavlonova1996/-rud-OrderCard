@@ -45,12 +45,6 @@ func GetAccounts(w http.ResponseWriter, r *http.Request) {
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&account)
-	if err != nil {
-		response.Code = http.StatusBadRequest
-		log.Println(err)
-		return
-	}
 	accounts, err := account.GetAccounts()
 	if err != nil {
 		response.Code = http.StatusInternalServerError

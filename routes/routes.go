@@ -9,40 +9,46 @@ import (
 func Routers() *mux.Router {
 	router := mux.NewRouter()
 
+	router.HandleFunc("/auth/sign-up", handlers.SignUp).Methods(http.MethodPost)
+	router.HandleFunc("/auth/sign-in", handlers.SignIn).Methods(http.MethodPost)
+
+	routerApi := router.PathPrefix("").Subrouter()
+	routerApi.Use(handlers.AuthorizeMiddleware)
+
 	//order card
-	router.HandleFunc("/orderCard", handlers.CreateOrderCard).Methods(http.MethodPost)
-	router.HandleFunc("/orderCard", handlers.GetOrderCards).Methods(http.MethodGet)
-	router.HandleFunc("/orderCard/{id}", handlers.GetOrderCardByID).Methods(http.MethodGet)
-	router.HandleFunc("/orderCard", handlers.UpdateOrderCardByID).Methods(http.MethodPut)
-	router.HandleFunc("/orderCard/{id}", handlers.DeleteOrderCardByID).Methods(http.MethodDelete)
+	routerApi.HandleFunc("/orderCard", handlers.CreateOrderCard).Methods(http.MethodPost)
+	routerApi.HandleFunc("/orderCard", handlers.GetOrderCards).Methods(http.MethodGet)
+	routerApi.HandleFunc("/orderCard/{id}", handlers.GetOrderCardByID).Methods(http.MethodGet)
+	routerApi.HandleFunc("/orderCard", handlers.UpdateOrderCardByID).Methods(http.MethodPut)
+	routerApi.HandleFunc("/orderCard/{id}", handlers.DeleteOrderCardByID).Methods(http.MethodDelete)
 
 	//user
-	router.HandleFunc("/user", handlers.CreateUser).Methods(http.MethodPost)
-	router.HandleFunc("/user", handlers.GetUsers).Methods(http.MethodGet)
-	router.HandleFunc("/user/{id}", handlers.GetUserByID).Methods(http.MethodGet)
-	router.HandleFunc("/user", handlers.UpdateUserByID).Methods(http.MethodPut)
-	router.HandleFunc("/user/{id}", handlers.DeleteUserByID).Methods(http.MethodDelete)
+	routerApi.HandleFunc("/user", handlers.CreateUser).Methods(http.MethodPost)
+	routerApi.HandleFunc("/user", handlers.GetUsers).Methods(http.MethodGet)
+	routerApi.HandleFunc("/user/{id}", handlers.GetUserByID).Methods(http.MethodGet)
+	routerApi.HandleFunc("/user", handlers.UpdateUserByID).Methods(http.MethodPut)
+	routerApi.HandleFunc("/user/{id}", handlers.DeleteUserByID).Methods(http.MethodDelete)
 
 	//card
-	router.HandleFunc("/orderCard", handlers.CreateCard).Methods(http.MethodPost)
-	router.HandleFunc("/orderCard", handlers.GetCards).Methods(http.MethodGet)
-	router.HandleFunc("/orderCard/{id}", handlers.GetCardByID).Methods(http.MethodGet)
-	router.HandleFunc("/orderCard", handlers.UpdateCardByID).Methods(http.MethodPut)
-	router.HandleFunc("/orderCard/{id}", handlers.DeleteCardByID).Methods(http.MethodDelete)
+	routerApi.HandleFunc("/card", handlers.CreateCard).Methods(http.MethodPost)
+	routerApi.HandleFunc("/card", handlers.GetCards).Methods(http.MethodGet)
+	routerApi.HandleFunc("/card/{id}", handlers.GetCardByID).Methods(http.MethodGet)
+	routerApi.HandleFunc("/card", handlers.UpdateCardByID).Methods(http.MethodPut)
+	routerApi.HandleFunc("/card/{id}", handlers.DeleteCardByID).Methods(http.MethodDelete)
 
 	//account
-	router.HandleFunc("/account", handlers.CreateAccount).Methods(http.MethodPost)
-	router.HandleFunc("/account", handlers.GetAccounts).Methods(http.MethodGet)
-	router.HandleFunc("/account/{id}", handlers.GetAccountByID).Methods(http.MethodGet)
-	router.HandleFunc("/account", handlers.UpdateAccountByID).Methods(http.MethodPut)
-	router.HandleFunc("/account/{id}", handlers.DeleteAccountByID).Methods(http.MethodDelete)
+	routerApi.HandleFunc("/account", handlers.CreateAccount).Methods(http.MethodPost)
+	routerApi.HandleFunc("/account", handlers.GetAccounts).Methods(http.MethodGet)
+	routerApi.HandleFunc("/account/{id}", handlers.GetAccountByID).Methods(http.MethodGet)
+	routerApi.HandleFunc("/account", handlers.UpdateAccountByID).Methods(http.MethodPut)
+	routerApi.HandleFunc("/account/{id}", handlers.DeleteAccountByID).Methods(http.MethodDelete)
 
 	//operation
-	router.HandleFunc("/operation", handlers.CreateOperation).Methods(http.MethodPost)
-	router.HandleFunc("/operation", handlers.GetOperations).Methods(http.MethodGet)
-	router.HandleFunc("/operation/{id}", handlers.GetOperationByID).Methods(http.MethodGet)
-	router.HandleFunc("/operation", handlers.UpdateOperationByID).Methods(http.MethodPut)
-	router.HandleFunc("/operation/{id}", handlers.DeleteOperationByID).Methods(http.MethodDelete)
+	routerApi.HandleFunc("/operation", handlers.CreateOperation).Methods(http.MethodPost)
+	routerApi.HandleFunc("/operation", handlers.GetOperations).Methods(http.MethodGet)
+	routerApi.HandleFunc("/operation/{id}", handlers.GetOperationByID).Methods(http.MethodGet)
+	routerApi.HandleFunc("/operation", handlers.UpdateOperationByID).Methods(http.MethodPut)
+	routerApi.HandleFunc("/operation/{id}", handlers.DeleteOperationByID).Methods(http.MethodDelete)
 
 	return router
 }

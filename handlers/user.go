@@ -1,12 +1,18 @@
 package handlers
 
 import (
+	"awesomeProject2/helpers"
 	user2 "awesomeProject2/internal/user"
 	"awesomeProject2/models"
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
+)
+
+var (
+	SentPassToEmailTemplate = fmt.Sprint("Ваш пароль %s, используйте его для входа в приложение")
 )
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
@@ -25,11 +31,36 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+
+	user.Role = "user"
+	password := helpers.RandStringPassword(15)
+	if err != nil {
+		response.Code = http.StatusBadRequest
+		log.Println("Не получилось генерировать пароль")
+		return
+	}
+
+	user.Password, err = helpers.HashPassword(password)
+	if err != nil {
+		log.Println("HashPassword: пароль не хешировался")
+		return
+	}
+
 	err = user.CreateUser()
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
 		log.Println(err)
+		return
+	}
+	log.Println(user.Password)
+	log.Println(password)
+	msg := []byte(fmt.Sprintf(SentPassToEmailTemplate, password))
+	emails := []string{user.Email}
+	err = helpers.SendMessageByEmail(emails, "Ваш пароль", msg)
+	if err != nil {
+		response.Code = http.StatusBadRequest
+		log.Println("Не получилось отправить пароль на почту", err)
 		return
 	}
 
@@ -45,12 +76,6 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&user)
-	if err != nil {
-		response.Code = http.StatusBadRequest
-		log.Println(err)
-		return
-	}
 	users, err := user.GetUsers()
 	if err != nil {
 		response.Code = http.StatusInternalServerError

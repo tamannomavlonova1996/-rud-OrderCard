@@ -9,7 +9,7 @@ import (
 type Operation models.Operation
 
 func (o *Operation) CreateOperation() error {
-	err := db.DB.Table("operation").Create(&o).Error
+	err := db.DB.Table("operations").Create(&o).Error
 	if err != nil {
 		log.Println("db, CreateOperation, err ", err)
 		return err
@@ -18,7 +18,7 @@ func (o *Operation) CreateOperation() error {
 }
 
 func (o *Operation) GetOperations() (operations []*Operation, err error) {
-	err = db.DB.Table("operation").Select("*").Find(&operations).Error
+	err = db.DB.Table("operations").Select("*").Preload("Account").Find(&operations).Error
 	if err != nil {
 		log.Println("db, GetOperations, err ", err)
 		return
@@ -27,7 +27,7 @@ func (o *Operation) GetOperations() (operations []*Operation, err error) {
 }
 
 func (o *Operation) GetOperationByID(id string) (*Operation, error) {
-	err := db.DB.Table("operation").Where("id=?", id).First(&o).Error
+	err := db.DB.Table("operations").Where("id=?", id).Preload("Account").First(&o).Error
 	if err != nil {
 		log.Println("db,GetOperationByID err", err)
 		return nil, err
@@ -36,7 +36,7 @@ func (o *Operation) GetOperationByID(id string) (*Operation, error) {
 }
 
 func (o *Operation) UpdateOperationByID() error {
-	err := db.DB.Table("operation").Where("id=?", o.ID).Update(o).Error
+	err := db.DB.Table("operations").Where("id=?", o.ID).Update(o).Error
 	if err != nil {
 		log.Println("db, UpdateOperationByID err", err)
 		return err
@@ -45,7 +45,7 @@ func (o *Operation) UpdateOperationByID() error {
 }
 
 func (o *Operation) DeleteOperationByID(id string) error {
-	err := db.DB.Table("operation").Delete(&o, "id=?", id).Error
+	err := db.DB.Table("operations").Delete(&o, "id=?", id).Error
 	if err != nil {
 		log.Println("db,DeleteOperationByID err", err)
 		return err
