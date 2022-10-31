@@ -18,7 +18,9 @@ func (cd *Card) CreateCard() error {
 }
 
 func (cd *Card) GetCards() (cards []*Card, err error) {
-	err = db.DB.Table("cards").Select("*").Preload("User").Find(&cards).Error
+	err = db.DB.Table("cards").
+		Select("*").Preload("User").
+		Find(&cards).Error
 	if err != nil {
 		log.Println("db,GetCards err", err)
 		return nil, err
