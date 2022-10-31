@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"awesomeProject2/internal/repository/orderCard"
+	"awesomeProject2/internal/service/orderCard"
 	"awesomeProject2/models"
 	"encoding/json"
 	"github.com/gorilla/mux"
@@ -11,21 +11,21 @@ import (
 
 func CreateOrderCard(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     orderCard.OrderCard
+		req      models.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&card)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		response.Code = http.StatusBadRequest
 		response.Message = "Неверные данные"
 		log.Println(err)
 		return
 	}
-	err = card.CreateOrderCards()
+	err = orderCard.CreateOrderCard(req)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
@@ -38,14 +38,13 @@ func CreateOrderCard(w http.ResponseWriter, r *http.Request) {
 
 func GetOrderCards(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     orderCard.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	result, err := card.GetOrderCards()
+	result, err := orderCard.GetOrderCards()
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
@@ -60,7 +59,6 @@ func GetOrderCards(w http.ResponseWriter, r *http.Request) {
 
 func GetOrderCardByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     orderCard.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -70,7 +68,7 @@ func GetOrderCardByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	result, err := card.GetOrderCardByID(id)
+	result, err := orderCard.GetOrderCardByID(id)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
@@ -82,28 +80,33 @@ func GetOrderCardByID(w http.ResponseWriter, r *http.Request) {
 
 func UpdateOrderCardByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     orderCard.OrderCard
+		req      models.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&card)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		response.Code = http.StatusBadRequest
-		response.Message = "Неверные данные"
+		response.Message = "Не удалось запарсить данные"
 		log.Println(err)
 		return
 	}
-	err = card.UpdateOrderCardByID()
+	err = orderCard.UpdateOrderCardByID(req)
+	if err != nil {
+		response.Code = http.StatusBadRequest
+		response.Message = "Не удалось обновить данные "
+		log.Println(err)
+		return
+	}
 
 	response.Message = "Данные обновлены успешно!"
 }
 
 func DeleteOrderCardByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     orderCard.OrderCard
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -113,7 +116,7 @@ func DeleteOrderCardByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	err := card.DeleteOrderCardByID(id)
+	err := orderCard.DeleteOrderCardByID(id)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()

@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	operation2 "awesomeProject2/internal/repository/operation"
+	"awesomeProject2/internal/service/operation"
 	"awesomeProject2/models"
 	"encoding/json"
 	"github.com/gorilla/mux"
@@ -11,21 +11,21 @@ import (
 
 func CreateOperation(w http.ResponseWriter, r *http.Request) {
 	var (
-		operation operation2.Operation
-		response  = models.Response{
+		req      models.Operation
+		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&operation)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		response.Code = http.StatusBadRequest
-		response.Message = "Неверные данные"
+		response.Message = "Не олучилось запарсить данные"
 		log.Println(err)
 		return
 	}
-	err = operation.CreateOperation()
+	err = operation.CreateOperation(req)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
@@ -38,12 +38,12 @@ func CreateOperation(w http.ResponseWriter, r *http.Request) {
 
 func GetOperations(w http.ResponseWriter, r *http.Request) {
 	var (
-		operation operation2.Operation
-		response  = models.Response{
+		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
+
 	operations, err := operation.GetOperations()
 	if err != nil {
 		response.Code = http.StatusInternalServerError
@@ -58,8 +58,7 @@ func GetOperations(w http.ResponseWriter, r *http.Request) {
 
 func GetOperationByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		operation operation2.Operation
-		response  = models.Response{
+		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
@@ -80,28 +79,27 @@ func GetOperationByID(w http.ResponseWriter, r *http.Request) {
 
 func UpdateOperationByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		operation operation2.Operation
-		response  = models.Response{
+		req      models.Operation
+		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&operation)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		log.Println(err)
 		return
 	}
-	err = operation.UpdateOperationByID()
+	err = operation.UpdateOperationByID(req)
 
 	response.Message = "Данные обновлены успешно!"
 }
 
 func DeleteOperationByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		operation operation2.Operation
-		response  = models.Response{
+		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)

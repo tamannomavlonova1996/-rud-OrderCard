@@ -60,8 +60,7 @@ func GetUserByID(id string) (us *user.User, err error) {
 	err = validation.Errors{
 		"id": validation.Validate(id, validation.Required, is.UUID),
 	}
-	var u user.User
-	us, err = u.GetUserByID(id)
+	us, err = us.GetUserByID(id)
 	if err != nil {
 		return nil, fmt.Errorf("не получилось получить юзера с таким айди : %w", err)
 	}

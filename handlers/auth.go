@@ -2,57 +2,34 @@ package handlers
 
 import (
 	"awesomeProject2/helpers"
-	user2 "awesomeProject2/internal/repository/user"
-	user1 "awesomeProject2/internal/service/user"
+	"awesomeProject2/internal/service/user"
 	"awesomeProject2/models"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 )
 
 func SignUp(w http.ResponseWriter, r *http.Request) {
 	var (
-		user     user2.User
+		req      models.User
 		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&user)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		response.Code = http.StatusBadRequest
 		log.Println(err)
 		return
 	}
-	user.Role = "user"
-	password := helpers.RandStringPassword(15)
+
+	err = user.CreateUser(req)
 	if err != nil {
 		response.Code = http.StatusBadRequest
-		log.Println("Не получилось генерировать пароль")
-		return
-	}
-
-	user.Password, err = helpers.HashPassword(password)
-	if err != nil {
-		log.Println("HashPassword: пароль не хешировался")
-		return
-	}
-
-	err = user.CreateUser()
-	if err != nil {
-		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
 		log.Println(err)
-		return
-	}
-	msg := []byte(fmt.Sprintf(user1.SentPassToEmailTemplate, password))
-	emails := []string{user.Email}
-	err = helpers.SendMessageByEmail(emails, "Ваш пароль", msg)
-	if err != nil {
-		response.Code = http.StatusBadRequest
-		log.Println("Не получилось отправить пароль на почту", err)
 		return
 	}
 
@@ -75,7 +52,7 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err := CreateToken(request.Email, request.Password)
+	token, err := helpers.CreateToken(request.Email, request.Password)
 	if err != nil {
 		response.Code = http.StatusBadRequest
 		log.Println(err)
