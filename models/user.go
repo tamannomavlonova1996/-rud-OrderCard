@@ -7,11 +7,11 @@ type User struct {
 	FullName  string    `json:"full_name" gorm:"full_name"`
 	Email     string    `json:"email" gorm:"email"`
 	Password  string    `json:"-" gorm:"password"`
-	Role      string    `json:"-" gorm:"role"`
+	Role      string    `json:"role" gorm:"role"`
 	CreatedAt time.Time `json:"created"`
 }
 
 type UserLogin struct {
 	Email    string `json:"email" gorm:"email"`
-	Password string `json:"-" gorm:"password"`
+	Password string `json:"password" gorm:"password"`
 }

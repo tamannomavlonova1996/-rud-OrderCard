@@ -39,9 +39,6 @@ func SendMessageByEmail(receivers []string, subject string, msg []byte) error {
 	addr := "smtp.yandex.ru:587"
 	host := "smtp.yandex.ru"
 
-	log.Println(receivers)
-	log.Println(msg)
-
 	auth := smtp.PlainAuth("", from, password, host)
 
 	msgTemp := fmt.Sprintf("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s\r\n",

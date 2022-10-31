@@ -36,7 +36,7 @@ func (u *User) GetUserByID(id string) (*User, error) {
 }
 
 func (u *User) UpdateUserByID() error {
-	err := db.DB.Table("users").Where("id=?", u.ID).Update(u).Error
+	err := db.DB.Table("users").Where("id=?", u.ID).Updates(User{FullName: u.FullName, Email: u.Email}).Error
 	if err != nil {
 		log.Println("db, UpdateUserByID err", err)
 		return err

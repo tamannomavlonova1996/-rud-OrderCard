@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	operation2 "awesomeProject2/internal/operation"
+	operation2 "awesomeProject2/internal/repository/operation"
 	"awesomeProject2/models"
 	"encoding/json"
 	"github.com/gorilla/mux"
@@ -44,13 +44,6 @@ func GetOperations(w http.ResponseWriter, r *http.Request) {
 		}
 	)
 	defer response.Send(w, r)
-
-	err := json.NewDecoder(r.Body).Decode(&operation)
-	if err != nil {
-		response.Code = http.StatusBadRequest
-		log.Println(err)
-		return
-	}
 	operations, err := operation.GetOperations()
 	if err != nil {
 		response.Code = http.StatusInternalServerError

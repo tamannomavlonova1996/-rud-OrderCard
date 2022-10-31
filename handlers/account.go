@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	account2 "awesomeProject2/internal/account"
+	account2 "awesomeProject2/internal/repository/account"
 	"awesomeProject2/models"
 	"encoding/json"
 	"github.com/gorilla/mux"

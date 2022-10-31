@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	card2 "awesomeProject2/internal/card"
+	card2 "awesomeProject2/internal/repository/card"
 	"awesomeProject2/models"
 	"encoding/json"
 	"github.com/gorilla/mux"

@@ -363,3 +363,11 @@ created by net/http.(*Server).Serve
 2022/10/25 12:24:56 EOF
 2022/10/25 12:25:54 ---------------Start logging---------------
 2022/10/25 12:26:44 invalid character '\u008d' after object key:value pair
+2022/10/31 11:09:34 ---------------Start logging---------------
+2022/10/31 11:28:19 ---------------Start logging---------------
+2022/10/31 11:31:55 FROM: t.rozikova@team.alif.tj
+2022/10/31 11:31:55 PASS:: Ne$n@komk@_1
+2022/10/31 11:35:08 token contains an invalid number of segments
+2022/10/31 11:39:11 token contains an invalid number of segments
+2022/10/31 11:39:32 token contains an invalid number of segments
+2022/10/31 11:39:35 token contains an invalid number of segments

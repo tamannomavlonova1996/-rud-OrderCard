@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"awesomeProject2/helpers"
-	"awesomeProject2/internal/service"
-	user2 "awesomeProject2/internal/user"
+	user2 "awesomeProject2/internal/repository/user"
+	user1 "awesomeProject2/internal/service/user"
 	"awesomeProject2/models"
 	"encoding/json"
 	"fmt"
@@ -47,7 +47,7 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	msg := []byte(fmt.Sprintf(SentPassToEmailTemplate, password))
+	msg := []byte(fmt.Sprintf(user1.SentPassToEmailTemplate, password))
 	emails := []string{user.Email}
 	err = helpers.SendMessageByEmail(emails, "Ваш пароль", msg)
 	if err != nil {
@@ -75,7 +75,7 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err := service.CreateToken(request.Email, request.Password)
+	token, err := CreateToken(request.Email, request.Password)
 	if err != nil {
 		response.Code = http.StatusBadRequest
 		log.Println(err)
