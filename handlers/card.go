@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	card2 "awesomeProject2/internal/repository/card"
+	"awesomeProject2/internal/service/card"
 	"awesomeProject2/models"
 	"encoding/json"
 	"github.com/gorilla/mux"
@@ -11,21 +11,21 @@ import (
 
 func CreateCard(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     card2.Card
+		req      models.Card
 		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&card)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		response.Code = http.StatusBadRequest
-		response.Message = "Неверные данные"
+		response.Message = "Не удалось запарсить данные"
 		log.Println(err)
 		return
 	}
-	err = card.CreateCard()
+	err = card.CreateCard(req)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
@@ -38,7 +38,6 @@ func CreateCard(w http.ResponseWriter, r *http.Request) {
 
 func GetCards(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     card2.Card
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -60,7 +59,6 @@ func GetCards(w http.ResponseWriter, r *http.Request) {
 
 func GetCardByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     card2.Card
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -82,28 +80,27 @@ func GetCardByID(w http.ResponseWriter, r *http.Request) {
 
 func UpdateCardByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     card2.Card
+		req      models.Card
 		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&card)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		response.Code = http.StatusBadRequest
-		response.Message = "Неверные данные"
+		response.Message = "Не получилось запарсить данные"
 		log.Println(err)
 		return
 	}
-	err = card.UpdateCardByID()
+	err = card.UpdateCardByID(req)
 
 	response.Message = "Данные обновлены успешно!"
 }
 
 func DeleteCardByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		card     card2.Card
 		response = models.Response{
 			Code: http.StatusOK,
 		}

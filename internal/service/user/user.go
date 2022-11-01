@@ -56,15 +56,15 @@ func GetUsers() (users []*user.User, err error) {
 	return users, nil
 }
 
-func GetUserByID(id string) (us *user.User, err error) {
+func GetUserByID(id string) (user *user.User, err error) {
 	err = validation.Errors{
 		"id": validation.Validate(id, validation.Required, is.UUID),
 	}
-	us, err = us.GetUserByID(id)
+	user, err = user.GetUserByID(id)
 	if err != nil {
 		return nil, fmt.Errorf("не получилось получить юзера с таким айди : %w", err)
 	}
-	return us, nil
+	return user, nil
 }
 
 func UpdateUserByID(req models.User) (err error) {

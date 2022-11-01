@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	account2 "awesomeProject2/internal/repository/account"
+	"awesomeProject2/internal/service/account"
 	"awesomeProject2/models"
 	"encoding/json"
 	"github.com/gorilla/mux"
@@ -11,20 +11,20 @@ import (
 
 func CreateAccount(w http.ResponseWriter, r *http.Request) {
 	var (
-		account  account2.Account
+		req      models.Account
 		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&account)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		response.Code = http.StatusBadRequest
 		log.Println(err)
 		return
 	}
-	err = account.CreateAccount()
+	err = account.CreateAccount(req)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		response.Message = err.Error()
@@ -38,7 +38,6 @@ func CreateAccount(w http.ResponseWriter, r *http.Request) {
 
 func GetAccounts(w http.ResponseWriter, r *http.Request) {
 	var (
-		account  account2.Account
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -59,7 +58,6 @@ func GetAccounts(w http.ResponseWriter, r *http.Request) {
 
 func GetAccountByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		account  account2.Account
 		response = models.Response{
 			Code: http.StatusOK,
 		}
@@ -81,27 +79,26 @@ func GetAccountByID(w http.ResponseWriter, r *http.Request) {
 
 func UpdateAccountByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		account  account2.Account
+		req      models.Account
 		response = models.Response{
 			Code: http.StatusOK,
 		}
 	)
 	defer response.Send(w, r)
 
-	err := json.NewDecoder(r.Body).Decode(&account)
+	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		response.Code = http.StatusInternalServerError
 		log.Println(err)
 		return
 	}
-	err = account.UpdateAccountByID()
+	err = account.UpdateAccountByID(req)
 
 	response.Message = "Данные обновлены успешно!"
 }
 
 func DeleteAccountByID(w http.ResponseWriter, r *http.Request) {
 	var (
-		account  account2.Account
 		response = models.Response{
 			Code: http.StatusOK,
 		}
