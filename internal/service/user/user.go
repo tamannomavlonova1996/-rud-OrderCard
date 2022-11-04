@@ -3,6 +3,7 @@ package user
 import (
 	"awesomeProject2/helpers"
 	"awesomeProject2/internal/repository/user"
+	"awesomeProject2/internal/service/valid"
 	"awesomeProject2/models"
 	"fmt"
 	validation "github.com/go-ozzo/ozzo-validation"
@@ -23,7 +24,11 @@ func CreateUser(req models.User) (err error) {
 		"role":      validation.Validate(req.Role, validation.Required, validation.In("user", "admin")),
 	}
 
-	password := helpers.RandStringPassword(15)
+	password := helpers.RandStrongPassword()
+	checkPassword := valid.ValidationPassword(password)
+	if !checkPassword {
+		return fmt.Errorf("пароль не прошел валидацию: %w", err)
+	}
 
 	req.Password, err = helpers.HashPassword(password)
 	if err != nil {
@@ -91,5 +96,36 @@ func DeleteUserByID(id string) (err error) {
 	if err != nil {
 		return fmt.Errorf("не получилось удалить юзера: %w", err)
 	}
+	return nil
+}
+
+func ResetPassword(req *models.ResetPassword) (err error) {
+
+	var user user.User
+	u, err := user.GetUserByEmail(req.Email)
+	if err != nil {
+		return fmt.Errorf("не получилось получить юзера по мейлу : %w", err)
+	}
+
+	password := helpers.RandStrongPassword()
+
+	u.Password, err = helpers.HashPassword(password)
+	if err != nil {
+		return fmt.Errorf("не получилось хешировать пароль: %w", err)
+	}
+
+	err = u.Update()
+	if err != nil {
+		return fmt.Errorf("не получилось обновить пароль: %w", err)
+	}
+
+	msg := []byte(fmt.Sprintf(SentPassToEmailTemplate, password))
+	emails := []string{u.Email}
+
+	err = helpers.SendMessageByEmail(emails, "ваш пароль", msg)
+	if err != nil {
+		return fmt.Errorf("не получилось отправить пароль: %w", err)
+	}
+
 	return nil
 }

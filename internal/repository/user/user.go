@@ -9,12 +9,7 @@ import (
 type User models.User
 
 func (u *User) CreateUser() error {
-	err := db.DB.Table("users").Create(&u).Error
-	if err != nil {
-		log.Println("db, CreateUser, err ", err)
-		return err
-	}
-	return nil
+	return db.DB.Table("users").Create(&u).Error
 }
 
 func (u *User) GetUsers() (users []*User, err error) {
@@ -55,9 +50,13 @@ func (u *User) DeleteUserByID(id string) error {
 
 func (u *User) GetUserByEmail(email string) (*User, error) {
 	err := db.DB.Table("users").Where("email=?", email).First(&u).Error
+	return u, err
+}
+func (u *User) Update() (err error) {
+	err = db.DB.Table("users").Save(&u).Error
 	if err != nil {
-		log.Println("db,GetUserByEmail err", err)
-		return nil, err
+		log.Println("db,Update err", err)
+		return err
 	}
-	return u, nil
+	return nil
 }

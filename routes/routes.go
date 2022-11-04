@@ -11,6 +11,8 @@ func Routers() *mux.Router {
 
 	router.HandleFunc("/auth/sign-up", handlers.SignUp).Methods(http.MethodPost)
 	router.HandleFunc("/auth/sign-in", handlers.SignIn).Methods(http.MethodPost)
+	router.HandleFunc("/auth/changePassword", handlers.ChangePassword).Methods(http.MethodPut)
+	router.HandleFunc("/auth/resetPassword", handlers.ResetPassword).Methods(http.MethodPut)
 
 	routerApi := router.PathPrefix("").Subrouter()
 	routerApi.Use(handlers.AuthorizeMiddleware)

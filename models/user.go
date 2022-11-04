@@ -15,3 +15,12 @@ type UserLogin struct {
 	Email    string `json:"email" gorm:"email"`
 	Password string `json:"password" gorm:"password"`
 }
+
+type ResetPassword struct {
+	Email string `json:"email" gorm:"email"`
+}
+type ChangePassword struct {
+	Password        string `json:"password" gorm:"password"`
+	NewPassword     string `json:"new_password" gorm:"new_password"`
+	ConfirmPassword string `json:"confirm_password" gorm:"confirm_password"`
+}

@@ -61,3 +61,31 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 	response.Payload = token
 	response.Message = "Вы успешно зашли в свой аккаунт"
 }
+
+func ResetPassword(w http.ResponseWriter, r *http.Request) {
+	var (
+		req      models.ResetPassword
+		response = models.Response{
+			Code: http.StatusOK,
+		}
+	)
+	defer response.Send(w, r)
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		response.Code = http.StatusBadRequest
+		log.Println(err)
+		return
+	}
+	err = user.ResetPassword(&req)
+	if err != nil {
+		response.Code = http.StatusBadRequest
+		log.Println(err)
+		return
+	}
+	response.Message = "Вы успешно забросили свой пароль"
+
+}
+
+func ChangePassword(w http.ResponseWriter, r *http.Request) {
+
+}

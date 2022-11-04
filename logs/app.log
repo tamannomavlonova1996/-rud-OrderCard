@@ -371,3 +371,11 @@ created by net/http.(*Server).Serve
 2022/10/31 11:39:11 token contains an invalid number of segments
 2022/10/31 11:39:32 token contains an invalid number of segments
 2022/10/31 11:39:35 token contains an invalid number of segments
+2022/11/03 09:37:17 ---------------Start logging---------------
+2022/11/03 09:39:07 ---------------Start logging---------------
+2022/11/03 09:39:28 FROM: t.rozikova@team.alif.tj
+2022/11/03 09:39:28 PASS:: Ne$n@komk@_1
+2022/11/03 15:18:07 ---------------Start logging---------------
+2022/11/03 15:25:08 ---------------Start logging---------------
+2022/11/03 15:25:50 FROM: t.rozikova@team.alif.tj
+2022/11/03 15:25:50 PASS:: Ne$n@komk@_1

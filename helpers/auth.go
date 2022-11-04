@@ -25,12 +25,23 @@ func CheckPasswordHash(password, hash string) bool {
 	return err == nil
 }
 
-const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*0123456789"
+const letterBytes1 = "abcdefghijklmnopqrstuvwxyz"
+const letterBytes2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const letterBytes3 = "!@#$%&*"
+const letterBytes4 = "0123456789"
 
-func RandStringPassword(n int) string {
+func RandStrongPassword() string {
+	pass := randStringPassword(4, letterBytes1)
+	pass += randStringPassword(4, letterBytes2)
+	pass += randStringPassword(4, letterBytes3)
+	pass += randStringPassword(4, letterBytes4)
+	return pass
+}
+
+func randStringPassword(n int, letters string) string {
 	b := make([]byte, n)
 	for i := range b {
-		b[i] = letterBytes[rand.Intn(len(letterBytes))]
+		b[i] = letters[rand.Intn(len(letters))]
 	}
 	return string(b)
 }
