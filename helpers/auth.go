@@ -114,7 +114,6 @@ func CreateToken(email string, password string) (string, error) {
 }
 
 func ParseToken(accessToken string) (string, error) {
-
 	token, err := jwt.ParseWithClaims(accessToken, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("Invalid signing method")

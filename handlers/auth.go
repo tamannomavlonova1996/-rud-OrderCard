@@ -5,6 +5,7 @@ import (
 	"awesomeProject2/internal/service/user"
 	"awesomeProject2/models"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -87,5 +88,6 @@ func ResetPassword(w http.ResponseWriter, r *http.Request) {
 }
 
 func ChangePassword(w http.ResponseWriter, r *http.Request) {
-
+	userID := getUserID(r.Context())
+	fmt.Println(userID)
 }

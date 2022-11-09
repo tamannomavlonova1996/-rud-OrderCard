@@ -379,3 +379,6 @@ created by net/http.(*Server).Serve
 2022/11/03 15:25:08 ---------------Start logging---------------
 2022/11/03 15:25:50 FROM: t.rozikova@team.alif.tj
 2022/11/03 15:25:50 PASS:: Ne$n@komk@_1
+2022/11/09 09:43:04 ---------------Start logging---------------
+2022/11/09 09:43:06 dial tcp [::1]:5467: connectex: No connection could be made because the target machine actively refused it.
+2022/11/09 09:43:06 Connection err dial tcp [::1]:5467: connectex: No connection could be made because the target machine actively refused it.
